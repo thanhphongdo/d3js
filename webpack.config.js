@@ -6,11 +6,11 @@ module.exports = {
     // mode: 'production',
     target: 'web',
     devtool: '#source-map',
-    entry: path.join(__dirname, "app", "index.js"),
+    entry: path.join(__dirname, "libs", "index.ts"),
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|ts)$/,
                 exclude: /node_modules/,
                 use: {
                     loader: "babel-loader"
@@ -19,7 +19,7 @@ module.exports = {
         ]
     },
     resolve: {
-        extensions: ['*', '.js', '.jsx']
+        extensions: ['*', '.js', '.ts', '.jsx']
     },
     output: {
         path: path.join(__dirname, "public/javascripts/dist"),
