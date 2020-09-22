@@ -1,11 +1,17 @@
 import * as d3 from "d3";
-export default class Chart<U> {
-    d3: typeof d3;
-    data: Array<U>;
-    constructor();
-    loadData(data: Array<any>): void;
-    loadCSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<U>): Promise<U[]>;
-    loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<U>): Promise<U[]>;
-    viewData(): void;
-    filterData(filter: (data: Array<U>) => Array<U>): void;
+interface ChartConfigInterface<U, V> {
+    data: U;
+    config: V;
+    [key: string]: any;
 }
+export default class Chart<U, V> {
+    d3: typeof d3;
+    context: ChartConfigInterface<U, V>;
+    constructor();
+    loadData(data: U): void;
+    loadCSV<T>(csvUrl: string, mapData?: (data: Array<T>) => U): Promise<U>;
+    viewConfig(): void;
+    viewData(): void;
+    filterData(filter: (data: U | undefined) => U): U;
+}
+export {};

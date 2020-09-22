@@ -1,44 +1,51 @@
 import * as d3 from "d3";
 
+interface ChartConfigInterface<U, V> {
+    data: U;
+    config: V;
+    [key: string]: any;
+}
 
-
-export default class Chart<U> {
+export default class Chart<U, V> {
     d3: typeof d3;
-    data: Array<U>;
+    context: ChartConfigInterface<U, V>;
     constructor() {
         this.d3 = d3;
-        this.data = [];
+        this.context = {
+            config: null as any,
+            data: null as any
+        };
     }
 
-    loadData(data: Array<any>) {
-        this.data = data;
+    loadData(data: U) {
+        this.context.data = data;
     }
 
-    loadCSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<U>) {
+    loadCSV<T>(csvUrl: string, mapData?: (data: Array<T>) => U) {
         return this.d3.csv(csvUrl).then(data => {
             if (mapData) {
-                this.data = mapData(data as any);
+                this.context.data = mapData(data as any);
             } else {
-                this.data = data as any;
+                this.context.data = data as any;
             }
-            return this.data;
+            return this.context.data;
         }).catch(err => {
             throw new Error(err);
         })
     }
 
-    loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<U>) {
-        return this.d3.tsv(csvUrl).then(data => {
-            if (mapData) {
-                this.data = mapData(data as any);
-            } else {
-                this.data = data as any;
-            }
-            return this.data;
-        }).catch(err => {
-            throw new Error(err);
-        })
-    }
+    // loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => U) {
+    //     return this.d3.tsv(csvUrl).then(data => {
+    //         if (mapData) {
+    //             this.data = mapData(data as any);
+    //         } else {
+    //             this.data = data as any;
+    //         }
+    //         return this.data;
+    //     }).catch(err => {
+    //         throw new Error(err);
+    //     })
+    // }
 
     // loadJSON(csvUrl: string) {
     //     return this.d3.json(csvUrl).then(data => {
@@ -49,11 +56,15 @@ export default class Chart<U> {
     //     })
     // }
 
-    viewData() {
-        console.log(this.data);
+    viewConfig() {
+        console.log(this.context.config);
     }
 
-    filterData(filter: (data: Array<U>) => Array<U>) {
-        this.data = filter(this.data);
+    viewData() {
+        console.log(this.context.data);
+    }
+
+    filterData(filter: (data: U | undefined) => U) {
+        return filter(this.context.data);
     }
 }

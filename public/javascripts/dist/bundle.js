@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "afc3dc596aca813bd4ae";
+/******/ 	var hotCurrentHash = "535689b983eafeeaae42";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -880,7 +880,7 @@ chart.loadCSV('xyz.csv', function (data) {
     };
   });
 }).then(function (d) {
-  chart.viewData();
+  chart.viewConfig();
 });
 
 /***/ }),
@@ -964,13 +964,16 @@ var Chart = /*#__PURE__*/function () {
     _classCallCheck(this, Chart);
 
     this.d3 = d3;
-    this.data = [];
+    this.context = {
+      config: null,
+      data: null
+    };
   }
 
   _createClass(Chart, [{
     key: "loadData",
     value: function loadData(data) {
-      this.data = data;
+      this.context.data = data;
     }
   }, {
     key: "loadCSV",
@@ -979,33 +982,28 @@ var Chart = /*#__PURE__*/function () {
 
       return this.d3.csv(csvUrl).then(function (data) {
         if (mapData) {
-          _this.data = mapData(data);
+          _this.context.data = mapData(data);
         } else {
-          _this.data = data;
+          _this.context.data = data;
         }
 
-        return _this.data;
+        return _this.context.data;
       })["catch"](function (err) {
         throw new Error(err);
       });
-    }
-  }, {
-    key: "loadTSV",
-    value: function loadTSV(csvUrl, mapData) {
-      var _this2 = this;
-
-      return this.d3.tsv(csvUrl).then(function (data) {
-        if (mapData) {
-          _this2.data = mapData(data);
-        } else {
-          _this2.data = data;
-        }
-
-        return _this2.data;
-      })["catch"](function (err) {
-        throw new Error(err);
-      });
-    } // loadJSON(csvUrl: string) {
+    } // loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => U) {
+    //     return this.d3.tsv(csvUrl).then(data => {
+    //         if (mapData) {
+    //             this.data = mapData(data as any);
+    //         } else {
+    //             this.data = data as any;
+    //         }
+    //         return this.data;
+    //     }).catch(err => {
+    //         throw new Error(err);
+    //     })
+    // }
+    // loadJSON(csvUrl: string) {
     //     return this.d3.json(csvUrl).then(data => {
     //         this.data = data as any;
     //         return data;
@@ -1015,14 +1013,19 @@ var Chart = /*#__PURE__*/function () {
     // }
 
   }, {
+    key: "viewConfig",
+    value: function viewConfig() {
+      console.log(this.context.config);
+    }
+  }, {
     key: "viewData",
     value: function viewData() {
-      console.log(this.data);
+      console.log(this.context.data);
     }
   }, {
     key: "filterData",
     value: function filterData(filter) {
-      this.data = filter(this.data);
+      return filter(this.context.data);
     }
   }]);
 

@@ -4,7 +4,9 @@ interface BarChartDataInterface {
     value: any;
     [key: string]: any;
 }
-export default class BarChart<T extends BarChartDataInterface> extends Chart<T> {
+interface BarCharConfigInterface {
+}
+export default class BarChart<U extends Array<BarChartDataInterface>, V extends BarCharConfigInterface> extends Chart<U, V> {
     constructor();
 }
 export {};

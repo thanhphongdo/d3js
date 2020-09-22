@@ -5,5 +5,5 @@ const chart = new lib_1.BarChart();
 chart.loadCSV('xyz.csv', data => {
     return data.map(d => { return { label: d.year, value: d.value }; });
 }).then(d => {
-    chart.viewData();
+    chart.viewConfig();
 });
