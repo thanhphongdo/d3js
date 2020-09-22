@@ -22,7 +22,7 @@ module.exports = env => {
                 ]
             },
             resolve: {
-                extensions: ['*', '.js', '.ts', '.jsx']
+                extensions: ['*', '.js', '.ts']
             },
             output: {
                 path: path.join(__dirname, 'public/javascripts/dist'),
@@ -56,7 +56,7 @@ module.exports = env => {
                 ],
             },
             resolve: {
-                extensions: ['*', '.js', '.ts', '.jsx']
+                extensions: ['*', '.js', '.ts']
             },
             output: {
                 path: path.join(__dirname, 'lib/dist'),

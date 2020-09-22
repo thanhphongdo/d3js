@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "3485d285936212437004";
+/******/ 	var hotCurrentHash = "e21e403742fc210f3886";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -866,7 +866,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var Chart = __webpack_require__(/*! ../lib */ "./lib/index.ts");
+var Chart = __webpack_require__(/*! ../lib */ "./lib/index.js");
 
 var chart = new Chart.BarChart();
 chart.loadCSV('xyz.csv', function (data) {
@@ -879,17 +879,16 @@ chart.loadCSV('xyz.csv', function (data) {
 
 /***/ }),
 
-/***/ "./lib/core/bar.ts":
+/***/ "./lib/core/bar.js":
 /*!*************************!*\
-  !*** ./lib/core/bar.ts ***!
+  !*** ./lib/core/bar.js ***!
   \*************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BarChart; });
-/* harmony import */ var _chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chart */ "./lib/core/chart.ts");
+
+
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -908,10 +907,14 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var chart_1 = __webpack_require__(/*! ./chart */ "./lib/core/chart.js");
 
-var BarChart = /*#__PURE__*/function (_Chart) {
-  _inherits(BarChart, _Chart);
+var BarChart = /*#__PURE__*/function (_chart_1$default) {
+  _inherits(BarChart, _chart_1$default);
 
   var _super = _createSuper(BarChart);
 
@@ -922,36 +925,39 @@ var BarChart = /*#__PURE__*/function (_Chart) {
   }
 
   return BarChart;
-}(_chart__WEBPACK_IMPORTED_MODULE_0__["default"]);
+}(chart_1["default"]);
 
-
+exports["default"] = BarChart;
 
 /***/ }),
 
-/***/ "./lib/core/chart.ts":
+/***/ "./lib/core/chart.js":
 /*!***************************!*\
-  !*** ./lib/core/chart.ts ***!
+  !*** ./lib/core/chart.js ***!
   \***************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Chart; });
-/* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
+var d3 = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
 
 var Chart = /*#__PURE__*/function () {
   function Chart() {
     _classCallCheck(this, Chart);
 
-    this.d3 = d3__WEBPACK_IMPORTED_MODULE_0__;
+    this.d3 = d3;
     this.data = [];
   }
 
@@ -1017,28 +1023,32 @@ var Chart = /*#__PURE__*/function () {
   return Chart;
 }();
 
-
+exports["default"] = Chart;
 
 /***/ }),
 
-/***/ "./lib/index.ts":
+/***/ "./lib/index.js":
 /*!**********************!*\
-  !*** ./lib/index.ts ***!
+  !*** ./lib/index.js ***!
   \**********************/
-/*! exports provided: Chart, BarChart */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/chart */ "./lib/core/chart.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Chart", function() { return _core_chart__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-/* harmony import */ var _core_bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/bar */ "./lib/core/bar.ts");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BarChart", function() { return _core_bar__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.BarChart = exports.Chart = void 0;
 
+var chart_1 = __webpack_require__(/*! ./core/chart */ "./lib/core/chart.js");
 
+exports.Chart = chart_1["default"];
+
+var bar_1 = __webpack_require__(/*! ./core/bar */ "./lib/core/bar.js");
+
+exports.BarChart = bar_1["default"];
 
 /***/ }),
 
