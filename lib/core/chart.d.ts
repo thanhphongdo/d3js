@@ -4,8 +4,8 @@ export default class Chart<U> {
     data: Array<U>;
     constructor();
     loadData(data: Array<any>): void;
-    loadCSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<any>): Promise<U[]>;
-    loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<any>): Promise<U[]>;
+    loadCSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<U>): Promise<U[]>;
+    loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<U>): Promise<U[]>;
     viewData(): void;
     filterData(filter: (data: Array<U>) => Array<U>): void;
 }

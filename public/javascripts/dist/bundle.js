@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "52d8a9c52e01f7b6449d";
+/******/ 	var hotCurrentHash = "afc3dc596aca813bd4ae";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -874,7 +874,10 @@ __webpack_require__.r(__webpack_exports__);
 var chart = new _lib__WEBPACK_IMPORTED_MODULE_0__["BarChart"]();
 chart.loadCSV('xyz.csv', function (data) {
   return data.map(function (d) {
-    return d;
+    return {
+      label: d.year,
+      value: d.value
+    };
   });
 }).then(function (d) {
   chart.viewData();

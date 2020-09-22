@@ -14,7 +14,7 @@ export default class Chart<U> {
         this.data = data;
     }
 
-    loadCSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<any>) {
+    loadCSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<U>) {
         return this.d3.csv(csvUrl).then(data => {
             if (mapData) {
                 this.data = mapData(data as any);
@@ -27,7 +27,7 @@ export default class Chart<U> {
         })
     }
 
-    loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<any>) {
+    loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => Array<U>) {
         return this.d3.tsv(csvUrl).then(data => {
             if (mapData) {
                 this.data = mapData(data as any);
