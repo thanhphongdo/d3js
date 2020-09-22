@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "e21e403742fc210f3886";
+/******/ 	var hotCurrentHash = "52d8a9c52e01f7b6449d";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -854,21 +854,24 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire("./app/index.js")(__webpack_require__.s = "./app/index.js");
+/******/ 	return hotCreateRequire("./app/index.ts")(__webpack_require__.s = "./app/index.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./app/index.js":
+/***/ "./app/index.ts":
 /*!**********************!*\
-  !*** ./app/index.js ***!
+  !*** ./app/index.ts ***!
   \**********************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var Chart = __webpack_require__(/*! ../lib */ "./lib/index.js");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib */ "./lib/index.js");
+/* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_lib__WEBPACK_IMPORTED_MODULE_0__);
 
-var chart = new Chart.BarChart();
+var chart = new _lib__WEBPACK_IMPORTED_MODULE_0__["BarChart"]();
 chart.loadCSV('xyz.csv', function (data) {
   return data.map(function (d) {
     return d;

@@ -9,7 +9,7 @@ module.exports = env => {
             mode: env.NODE_ENV,
             target: 'web',
             devtool: '#source-map',
-            entry: path.join(__dirname, 'app', 'index.js'),
+            entry: path.join(__dirname, 'app', 'index.ts'),
             module: {
                 rules: [
                     {
