@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "18038f378fee67ef46a1";
+/******/ 	var hotCurrentHash = "3485d285936212437004";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -854,15 +854,84 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire("./libs/index.ts")(__webpack_require__.s = "./libs/index.ts");
+/******/ 	return hotCreateRequire("./app/index.js")(__webpack_require__.s = "./app/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./libs/core/chart.ts":
-/*!****************************!*\
-  !*** ./libs/core/chart.ts ***!
-  \****************************/
+/***/ "./app/index.js":
+/*!**********************!*\
+  !*** ./app/index.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Chart = __webpack_require__(/*! ../lib */ "./lib/index.ts");
+
+var chart = new Chart.BarChart();
+chart.loadCSV('xyz.csv', function (data) {
+  return data.map(function (d) {
+    return d;
+  });
+}).then(function (d) {
+  chart.viewData();
+});
+
+/***/ }),
+
+/***/ "./lib/core/bar.ts":
+/*!*************************!*\
+  !*** ./lib/core/bar.ts ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return BarChart; });
+/* harmony import */ var _chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./chart */ "./lib/core/chart.ts");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var BarChart = /*#__PURE__*/function (_Chart) {
+  _inherits(BarChart, _Chart);
+
+  var _super = _createSuper(BarChart);
+
+  function BarChart() {
+    _classCallCheck(this, BarChart);
+
+    return _super.call(this);
+  }
+
+  return BarChart;
+}(_chart__WEBPACK_IMPORTED_MODULE_0__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./lib/core/chart.ts":
+/*!***************************!*\
+  !*** ./lib/core/chart.ts ***!
+  \***************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -892,16 +961,56 @@ var Chart = /*#__PURE__*/function () {
       this.data = data;
     }
   }, {
-    key: "loadCsv",
-    value: function loadCsv(csvUrl) {
+    key: "loadCSV",
+    value: function loadCSV(csvUrl, mapData) {
       var _this = this;
 
       return this.d3.csv(csvUrl).then(function (data) {
-        _this.data = data;
-        return data;
+        if (mapData) {
+          _this.data = mapData(data);
+        } else {
+          _this.data = data;
+        }
+
+        return _this.data;
       })["catch"](function (err) {
         throw new Error(err);
       });
+    }
+  }, {
+    key: "loadTSV",
+    value: function loadTSV(csvUrl, mapData) {
+      var _this2 = this;
+
+      return this.d3.tsv(csvUrl).then(function (data) {
+        if (mapData) {
+          _this2.data = mapData(data);
+        } else {
+          _this2.data = data;
+        }
+
+        return _this2.data;
+      })["catch"](function (err) {
+        throw new Error(err);
+      });
+    } // loadJSON(csvUrl: string) {
+    //     return this.d3.json(csvUrl).then(data => {
+    //         this.data = data as any;
+    //         return data;
+    //     }).catch(err => {
+    //         throw new Error(err);
+    //     })
+    // }
+
+  }, {
+    key: "viewData",
+    value: function viewData() {
+      console.log(this.data);
+    }
+  }, {
+    key: "filterData",
+    value: function filterData(filter) {
+      this.data = filter(this.data);
     }
   }]);
 
@@ -912,25 +1021,24 @@ var Chart = /*#__PURE__*/function () {
 
 /***/ }),
 
-/***/ "./libs/index.ts":
-/*!***********************!*\
-  !*** ./libs/index.ts ***!
-  \***********************/
-/*! no exports provided */
+/***/ "./lib/index.ts":
+/*!**********************!*\
+  !*** ./lib/index.ts ***!
+  \**********************/
+/*! exports provided: Chart, BarChart */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _core_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/chart */ "./libs/core/chart.ts");
+/* harmony import */ var _core_chart__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./core/chart */ "./lib/core/chart.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Chart", function() { return _core_chart__WEBPACK_IMPORTED_MODULE_0__["default"]; });
 
-var chart = new _core_chart__WEBPACK_IMPORTED_MODULE_0__["default"]();
-console.log(chart.d3); // chart.d3.csv('xyz.csv').then(d => {
-//     console.log(d);
-// })
+/* harmony import */ var _core_bar__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./core/bar */ "./lib/core/bar.ts");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "BarChart", function() { return _core_bar__WEBPACK_IMPORTED_MODULE_1__["default"]; });
 
-chart.loadCsv('xyz.csv').then(function (data) {
-  console.log(chart.data);
-});
+
+
+
 
 /***/ }),
 
