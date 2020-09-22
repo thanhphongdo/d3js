@@ -63,7 +63,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "535689b983eafeeaae42";
+/******/ 	var hotCurrentHash = "e324eb1392d2e0a781d1";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -871,7 +871,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../lib */ "./lib/index.js");
 /* harmony import */ var _lib__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_lib__WEBPACK_IMPORTED_MODULE_0__);
 
-var chart = new _lib__WEBPACK_IMPORTED_MODULE_0__["BarChart"]();
+var chart = new _lib__WEBPACK_IMPORTED_MODULE_0__["BarChart"]('');
 chart.loadCSV('xyz.csv', function (data) {
   return data.map(function (d) {
     return {
@@ -924,10 +924,10 @@ var BarChart = /*#__PURE__*/function (_chart_1$default) {
 
   var _super = _createSuper(BarChart);
 
-  function BarChart() {
+  function BarChart(selector) {
     _classCallCheck(this, BarChart);
 
-    return _super.call(this);
+    return _super.call(this, selector);
   }
 
   return BarChart;
@@ -960,20 +960,37 @@ Object.defineProperty(exports, "__esModule", {
 var d3 = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
 
 var Chart = /*#__PURE__*/function () {
-  function Chart() {
+  function Chart(selector) {
     _classCallCheck(this, Chart);
 
     this.d3 = d3;
     this.context = {
       config: null,
-      data: null
+      data: null,
+      selector: selector
     };
   }
 
   _createClass(Chart, [{
+    key: "setSelector",
+    value: function setSelector(selector) {
+      this.context.selector = selector;
+    }
+  }, {
+    key: "loadContext",
+    value: function loadContext(data, config) {
+      this.context.data = data;
+      this.context.config = config;
+    }
+  }, {
     key: "loadData",
     value: function loadData(data) {
       this.context.data = data;
+    }
+  }, {
+    key: "loadConfig",
+    value: function loadConfig(config) {
+      this.context.config = config;
     }
   }, {
     key: "loadCSV",
@@ -991,27 +1008,24 @@ var Chart = /*#__PURE__*/function () {
       })["catch"](function (err) {
         throw new Error(err);
       });
-    } // loadTSV<T>(csvUrl: string, mapData?: (data: Array<T>) => U) {
-    //     return this.d3.tsv(csvUrl).then(data => {
-    //         if (mapData) {
-    //             this.data = mapData(data as any);
-    //         } else {
-    //             this.data = data as any;
-    //         }
-    //         return this.data;
-    //     }).catch(err => {
-    //         throw new Error(err);
-    //     })
-    // }
-    // loadJSON(csvUrl: string) {
-    //     return this.d3.json(csvUrl).then(data => {
-    //         this.data = data as any;
-    //         return data;
-    //     }).catch(err => {
-    //         throw new Error(err);
-    //     })
-    // }
+    }
+  }, {
+    key: "loadTSV",
+    value: function loadTSV(csvUrl, mapData) {
+      var _this2 = this;
 
+      return this.d3.tsv(csvUrl).then(function (data) {
+        if (mapData) {
+          _this2.context.data = mapData(data);
+        } else {
+          _this2.context.data = data;
+        }
+
+        return _this2.context.data;
+      })["catch"](function (err) {
+        throw new Error(err);
+      });
+    }
   }, {
     key: "viewConfig",
     value: function viewConfig() {
